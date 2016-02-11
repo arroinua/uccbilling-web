@@ -1,13 +1,6 @@
 var Admins = require('../models/admins');
 var jwt = require('jsonwebtoken');
-var bcrypt = require('bcrypt');
-
-var isValidPassword = function(password, hash, cb){
-    bcrypt.compare(password, hash, function(err, isMatch){
-        if(err) throw err;
-        cb(isMatch);
-    });
-};
+var bcrypt = require('../services/bcrypt');
 
 module.exports = {
 
@@ -26,7 +19,8 @@ module.exports = {
 				next(new Error(err));
 			} else {
 				if(user && user.state === 'active'){
-					isValidPassword(req.body.password, user.password, function (isMatch){
+					bcrypt.compare(req.body.password, user.password, function (err, isMatch){
+						if(err) throw err;
 						if(!isMatch){
 							res.json({
 								success: false,
