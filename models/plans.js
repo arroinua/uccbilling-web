@@ -8,7 +8,7 @@ var PlanSchema = new Schema({
     trialPeriod: { type: Boolean, default: false },
     trialDuration: Number,
     trialDurationUnit: String,
-    billingPeriod: {Number},
+    billingPeriod: Number,
     billingPeriodUnit: String,
     neverExpires: { type: Boolean, default: false },
     price: String,

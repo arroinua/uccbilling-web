@@ -74,9 +74,25 @@ billingApp.controller('DashController', ['$rootScope', '$scope', '$location', 'a
 billingApp.controller('PlanController', ['$rootScope', '$routeParams', '$scope', 'api', function($rootScope, $routeParams, $scope, api){
 	
 	var id = $routeParams.id;
+
+	function getAddons(){
+		api.request({
+			url: '/addons/'
+		}, function(result){
+			$scope.addOns = result;
+		}, function(err){
+			$rootScope.error = err;
+		});
+	}
+
 	$rootScope.title = "Plan";
 
 	$scope.plan = {};
+	$scope.addOns = [];
+	$scope.newAddon = {
+		index: '0',
+		quantity: 1
+	};
 
 	if(id !== 'new'){
 		api.request({
@@ -91,6 +107,17 @@ billingApp.controller('PlanController', ['$rootScope', '$routeParams', '$scope',
 			$rootScope.error = err;
 		});
 	}
+
+	$scope.addAddon = function(){
+		var newAddon = $scope.addOns[$scope.newAddon.index];
+		console.log('addAddon: ', newAddon);
+		newAddon.quantity = $scope.newAddon.quantity;
+		$scope.plan.addOns.push(newAddon);
+	};
+
+	$scope.removeAddon = function(index){
+		$scope.plan.addOns.splice(index, 1);
+	};
 	
 	$scope.setPlan = function(){
 		console.log($scope.plan);
@@ -117,9 +144,11 @@ billingApp.controller('PlanController', ['$rootScope', '$routeParams', '$scope',
 		});
 	};
 
+	getAddons();
+
 }]);
 
-billingApp.controller('AddonController', ['$rootScope', '$routeParams', '$scope', 'api', function($rootScope, $routeParams, $scope, api){
+billingApp.controller('AddonController', ['$rootScope', '$routeParams', '$location', '$scope', 'api', function($rootScope, $routeParams, $location, $scope, api){
 	
 	var id = $routeParams.id;
 	$rootScope.title = "Addon";
@@ -155,6 +184,7 @@ billingApp.controller('AddonController', ['$rootScope', '$routeParams', '$scope'
 			params: $scope.addon
 		}, function(result){
 			console.log(result);
+			$location.path('/addons/new');
 		}, function(err){
 			$rootScope.error = err;
 		});

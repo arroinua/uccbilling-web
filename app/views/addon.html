@@ -18,13 +18,26 @@
 					<input type="checkbox" name="neverExpires" ng-model="addon.neverExpires"> Never Expires
 				</label>
 			</div>
-			<p class="help-block">If checked will last until subscription exists</p>
+			<p class="help-block">If checked, last until subscription exists</p>
 		</div>
-		<div class="col-sm-2 col-xs-4" ng-hide="addon.neverExpires">
+		<div class="col-sm-2 col-xs-4">
+			<label for="billingPeriod">Billing Period</label>
+			<input type="number" name="billingPeriod" ng-model="addon.billingPeriod" class="form-control">
+		</div>
+		<div class="col-sm-4 col-xs-8">
+			<label for="billingPeriodUnit">Billing Period Units</label>
+			<select name="billingPeriodUnit" ng-model="addon.billingPeriodUnit" class="form-control">
+				<option value="days">Days</option>
+				<option value="months">Months</option>
+				<option value="years">Years</option>
+			</select>
+		</div>
+		<p class="col-xs-12 help-block">Addon's lifetime until it expires</p>
+		<!-- <div class="col-sm-2 col-xs-4" ng-hide="addon.neverExpires">
 			<label for="billingCyrcles">Billing Cyrcles</label>
 			<input type="number" name="billingCyrcles" ng-model="addon.billingCyrcles" class="form-control">
 			<p class="help-block">Number of circles until add-on expires</p>
-		</div>
+		</div> -->
 	</div>
 	<div class="row">
 		<div class="col-sm-2">
@@ -44,9 +57,11 @@
 		<div class="col-sm-2">
 			<label for="currency">Currency</label>
 			<select name="currency" ng-model="addon.currency" class="form-control">
+				<option value="EUR">EUR</option>
 				<option value="USD">USD</option>
+				<option value="UAH">UAH</option>
 			</select>
-			<p class="help-block">Add-on currency</p>
+			<p class="help-block">Add-on currency (ISO format)</p>
 		</div>
 	</div>
 	<nav class="sticky-nav bottom-nav white-color-bgr semi-transparent">

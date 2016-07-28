@@ -103,6 +103,26 @@
 		</div>
 	</div>
 	<div class="row">
+		<div class="col-sm-12">
+			<label for="addOns">AddOns</label>
+			<form>
+				<select name="new-addon" ng-model="newAddon.index">
+					<option ng-repeat="addon in addOns track by $index" ng-value="$index">{{addon.name}}</option>
+				</select>
+				<input type="number" ng-model="newAddon.quantity">
+				<button ng-click="addAddon()">Add</button>
+			</form>
+			<ul>
+				<li ng-repeat="addon in plan.addOns">
+					<input type="text" ng-model="addon.name">
+					<input type="number" ng-model="addon.quantity">
+					<button ng-click="removeAddon($index)">x</button>
+				</li>
+			</ul>
+			<p class="help-block">Plan AddOns</p>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-sm-6">
 			<label for="customData">Custom JSON</label>
 			<textarea name="customData" ng-model="plan.customData" rows="4" class="form-control"></textarea>

@@ -5,10 +5,10 @@ var AddonsSchema = new Schema({
     name: String,
     description: String,
     neverExpires: { type: Boolean, default: true },
-    // billingCyrcles: Number,
-    // currentBillingCyrcle: { type: Number, default: 1 },
+    billingPeriod: Number,
+    billingPeriodUnit: String,
     price: String,
-    quantity: Number,
+    // quantity: Number,
     currency: String,
     createdAt: Number,
     updatedAt: Number

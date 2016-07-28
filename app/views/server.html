@@ -1,5 +1,18 @@
 <form class="form">
 	<div class="row">
+		<div class="col-xs-12">
+			<label>State</label>
+			<br>
+			<label>
+				<input type="radio" name="state" ng-model="object.state" value="1"> Enabled
+			</label>
+			<label>
+				<input type="radio" name="state" ng-model="object.state" value="0"> Disabled
+			</label>
+			<p class="help-block">Server State</p>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-sm-4">
 			<label for="name">Name</label>
 			<input type="text" name="name" ng-model="object.name" class="form-control">	
